@@ -16,8 +16,8 @@ public class DepositView implements View {
   @Override
   public void display() {
     System.out.println("Enter deposit amount(or type 0 to cancel)");
-    String keypadInput = keypad.getInput();
-    OperationResult operationResult = performOperation(keypadInput);
+    String validKeypadInput = getValidKeyPadInput();
+    OperationResult operationResult = performOperation(validKeypadInput);
     if (operationResult.equals(OperationResult.OPERATION_CANCELED)) {
       System.out.println("Deposit canceled");
       atm.setState(AtmState.MENU);
@@ -31,6 +31,15 @@ public class DepositView implements View {
       System.out.println("Transaction canceled due to inactivity");
       atm.setState(AtmState.MENU);
     }
+  }
+
+  private String getValidKeyPadInput() {
+    String keyPadInput = keypad.getInput();
+    while(!validateInput(keyPadInput)) {
+      System.out.println("Enter any number");
+      keyPadInput = keypad.getInput();
+    }
+    return keyPadInput;
   }
 
   private OperationResult performOperation(String keypadInput) {
