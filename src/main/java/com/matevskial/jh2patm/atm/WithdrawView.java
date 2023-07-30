@@ -18,7 +18,7 @@ public class WithdrawView implements View {
     AtmState nextState = null;
     while (nextState == null) {
       displayMenu();
-      String keypadInput = keypad.getInput();
+      String keypadInput = keypad.getNumericInput();
       OperationResult operationResult = performOperation(keypadInput);
       if(operationResult == OperationResult.TRANSACTION_CANCELED) {
         nextState = AtmState.MENU;

@@ -16,7 +16,7 @@ public class DepositView implements View {
   @Override
   public void display() {
     System.out.println("Enter deposit amount(or type 0 to cancel)");
-    String validKeypadInput = getValidKeyPadInput();
+    String validKeypadInput = keypad.getNumericInput();
     OperationResult operationResult = performOperation(validKeypadInput);
     if (operationResult.equals(OperationResult.OPERATION_CANCELED)) {
       System.out.println("Deposit canceled");
@@ -33,18 +33,7 @@ public class DepositView implements View {
     }
   }
 
-  private String getValidKeyPadInput() {
-    String keyPadInput = keypad.getInput();
-    while(!validateInput(keyPadInput)) {
-      System.out.println("Enter any number");
-      keyPadInput = keypad.getInput();
-    }
-    return keyPadInput;
-  }
-
   private OperationResult performOperation(String keypadInput) {
-    validateInput(keypadInput);
-
     if("0".equals(keypadInput)) {
       return OperationResult.OPERATION_CANCELED;
     }
@@ -64,10 +53,6 @@ public class DepositView implements View {
     } catch (BankDepositException e) {
       return OperationResult.DEPOSIT_FAILED;
     }
-  }
-
-  private boolean validateInput(String keypadInput) {
-    return keypadInput.matches("\\d+");
   }
 
   private enum OperationResult {
