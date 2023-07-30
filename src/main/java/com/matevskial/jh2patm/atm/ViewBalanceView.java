@@ -1,6 +1,5 @@
 package com.matevskial.jh2patm.atm;
 
-import com.matevskial.jh2patm.atm.Atm.State;
 import com.matevskial.jh2patm.bank.BankService;
 import lombok.RequiredArgsConstructor;
 
@@ -15,12 +14,12 @@ public class ViewBalanceView implements View {
   @Override
   public void display() {
     System.out.println("Your account balance: " + bankService.getAccountBalance(atm.getUserSession().getAccountId()));
-    State nextState = null;
+    AtmState nextState = null;
     while(nextState == null) {
       System.out.printf("\t0 - Back to menu%n");
       String keypadInput = keypad.getInput();
       if("0".equals(keypadInput)) {
-        nextState = State.MENU;
+        nextState = AtmState.MENU;
       } else {
         System.out.println("Invalid option selected " + keypadInput);
       }

@@ -1,6 +1,5 @@
 package com.matevskial.jh2patm.atm;
 
-import com.matevskial.jh2patm.atm.Atm.State;
 import com.matevskial.jh2patm.bank.BankService;
 import com.matevskial.jh2patm.bank.UserAuthenticationInput;
 import com.matevskial.jh2patm.bank.UserAuthenticationResponse;
@@ -38,7 +37,7 @@ public class WelcomeView implements View {
           throw new RuntimeException(e);
         }
       } else {
-        atm.setState(State.MENU);
+        atm.setState(AtmState.MENU);
         atm.setUserSession(UserSession.builder().accountId(userAuthenticationResponse.getAccountId()).build());
       }
     }

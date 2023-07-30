@@ -1,6 +1,5 @@
 package com.matevskial.jh2patm.atm;
 
-import com.matevskial.jh2patm.atm.Atm.State;
 import com.matevskial.jh2patm.bank.BankAccountInsuficientBalance;
 import com.matevskial.jh2patm.bank.BankService;
 import java.math.BigDecimal;
@@ -16,15 +15,15 @@ public class WithdrawView implements View {
 
   @Override
   public void display() {
-    State nextState = null;
+    AtmState nextState = null;
     while (nextState == null) {
       displayMenu();
       String keypadInput = keypad.getInput();
       OperationResult operationResult = performOperation(keypadInput);
       if(operationResult == OperationResult.TRANSACTION_CANCELED) {
-        nextState = State.MENU;
+        nextState = AtmState.MENU;
       } else if(operationResult == OperationResult.WITHDRAWAL_SUCCESSFUL) {
-        nextState = State.MENU;
+        nextState = AtmState.MENU;
       } else if(operationResult == OperationResult.WITHDRAWAL_FAILED) {
         System.out.println("Please choose a smaller amount");
       } else if(operationResult == OperationResult.NO_OPERATION_PERFORMED) {

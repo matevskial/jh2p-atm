@@ -1,6 +1,5 @@
 package com.matevskial.jh2patm.atm;
 
-import com.matevskial.jh2patm.atm.Atm.State;
 import com.matevskial.jh2patm.bank.BankDepositException;
 import com.matevskial.jh2patm.bank.BankService;
 import java.math.BigDecimal;
@@ -21,16 +20,16 @@ public class DepositView implements View {
     OperationResult operationResult = performOperation(keypadInput);
     if (operationResult.equals(OperationResult.OPERATION_CANCELED)) {
       System.out.println("Deposit canceled");
-      atm.setState(State.MENU);
+      atm.setState(AtmState.MENU);
     } else if(operationResult.equals(OperationResult.DEPOSIT_SUCCESSFUL)) {
       System.out.println("Deposit successful");
-      atm.setState(State.MENU);
+      atm.setState(AtmState.MENU);
     } else if(operationResult.equals(OperationResult.DEPOSIT_FAILED)) {
       System.out.println("Deposit failed");
-      atm.setState(State.MENU);
+      atm.setState(AtmState.MENU);
     } else if(operationResult.equals(OperationResult.DEPOSIT_SLOT_INACTIVITY)) {
       System.out.println("Transaction canceled due to inactivity");
-      atm.setState(State.MENU);
+      atm.setState(AtmState.MENU);
     }
   }
 

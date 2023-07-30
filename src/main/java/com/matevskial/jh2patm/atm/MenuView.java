@@ -1,6 +1,5 @@
 package com.matevskial.jh2patm.atm;
 
-import com.matevskial.jh2patm.atm.Atm.State;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -12,7 +11,7 @@ public class MenuView implements View {
   @Override
   public void display() {
     System.out.println("Main menu");
-    State nextState = null;
+    AtmState nextState = null;
     while (nextState == null) {
       System.out.printf("\t1 - View my balance%n");
       System.out.printf("\t2 - Withdraw cash%n");
@@ -27,12 +26,12 @@ public class MenuView implements View {
     atm.setState(nextState);
   }
 
-  private State getNextState(String keypadInput) {
+  private AtmState getNextState(String keypadInput) {
     return switch (keypadInput) {
-      case "1" -> State.VIEW_BALANCE;
-      case "2" -> State.WITHDRAW;
-      case "3" -> State.DEPOSIT;
-      case "4" -> State.WELCOME;
+      case "1" -> AtmState.VIEW_BALANCE;
+      case "2" -> AtmState.WITHDRAW;
+      case "3" -> AtmState.DEPOSIT;
+      case "4" -> AtmState.WELCOME;
       default -> null;
     };
   }

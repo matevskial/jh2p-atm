@@ -13,7 +13,7 @@ public class Atm {
   private final DepositSlot depositSlot;
   private final WithdrawSlot withdrawSlot;
 
-  private State currentState = State.WELCOME;
+  private AtmState currentState = AtmState.WELCOME;
 
   @Getter
   private UserSession userSession;
@@ -21,7 +21,7 @@ public class Atm {
   private BigDecimal cash = new BigDecimal("10000");
 
   public void run() {
-    while(currentState != State.SHUTDOWN_ATM) {
+    while(currentState != AtmState.SHUTDOWN_ATM) {
       View currentView = switch (currentState) {
         case WELCOME -> new WelcomeView(this, bankService, keypad);
         case MENU -> new MenuView(this, keypad);
@@ -34,7 +34,7 @@ public class Atm {
     }
   }
 
-  public void setState(State state) {
+  public void setState(AtmState state) {
     currentState = state;
   }
 
@@ -42,12 +42,4 @@ public class Atm {
     this.userSession = userSession;
   }
 
-  public enum State {
-    WELCOME,
-    MENU,
-    VIEW_BALANCE,
-    WITHDRAW,
-    DEPOSIT,
-    SHUTDOWN_ATM
-  }
 }
